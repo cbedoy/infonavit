@@ -13,11 +13,14 @@ Simula tu crédito Crediterreno con desglose completo de amortización, ISR esti
 - 📄 **Exportación/Importación PDF** — guarda y recupera el estado completo de la simulación
 - 📈 **Gráfico anual** — capital vs interés por año (Canvas API)
 
-## Demo
-
-🔗 [https://cbedoy.github.io/crediterreno](https://cbedoy.github.io/crediterreno)
-
 ## Archivos
+
+| Archivo | Propósito |
+|---------|-----------|
+| `index.html` | Markup HTML puro (sin `<style>`/`<script>` inline) |
+| `styles.css` | Todos los estilos y design tokens |
+| `app.js` | Lógica completa: estado, cálculos, rendering, PDF I/O |
+| `.claude/skills/crediterreno-logic/SKILL.md` | Referencia de la lógica de negocio para agentes AI |
 
 | Archivo | Propósito |
 |---------|-----------|

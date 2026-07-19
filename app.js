@@ -296,7 +296,7 @@ function renderEIList(){
     <div class="drow" style="flex-wrap:wrap">
       <select style="flex:1.5;min-width:150px" onchange="updateEI(${ei.id},'type',this.value)">${opts.replace(`value="${ei.type}"`,'value="'+ei.type+'" selected')}</select>
       <select style="min-width:80px" onchange="updateEI(${ei.id},'calMonth',this.value)">${mOpts.replace(`value="${ei.calMonth}"`,'value="'+ei.calMonth+'" selected')}</select>
-      <input type="number" min="0" step="500" placeholder="Monto $" value="${ei.amount}" style="min-width:90px" oninput="updateEI(${ei.id},'amount',this.value)"/>
+      <input type="number" min="0" step="500" placeholder="Monto $" value="${ei.amount}" style="min-width:90px" onchange="updateEI(${ei.id},'amount',this.value)"/>
       <select style="min-width:90px" onchange="updateEI(${ei.id},'repeat',this.value)">
         <option value="true" ${ei.repeat?'selected':''}>Cada año</option>
         <option value="false" ${!ei.repeat?'selected':''}>Solo una vez</option>

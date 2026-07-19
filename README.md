@@ -17,6 +17,14 @@ Simula tu crédito Crediterreno con desglose completo de amortización, ISR esti
 
 🔗 [https://cbedoy.github.io/crediterreno](https://cbedoy.github.io/crediterreno)
 
+## Archivos
+
+| Archivo | Propósito |
+|---------|-----------|
+| `index.html` | Markup HTML puro (sin <style>/<script> inline) |
+| `styles.css` | Todos los estilos y design tokens |
+| `app.js` | Lógica completa: estado, cálculos, rendering, PDF I/O |
+
 ## Stack
 
 - HTML + CSS + JavaScript (vanilla, sin dependencias)

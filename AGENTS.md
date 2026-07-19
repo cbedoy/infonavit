@@ -15,7 +15,22 @@ Una calculadora integral de crédito Infonavit para compra de terreno (Crediterr
 
 | File | Purpose |
 |------|---------|
-| `index.html` | Single-file app: markup, styles, and all JS logic |
+| `index.html` | Markup only (structure, IDs, script/style tags) |
+| `styles.css` | All styles and design tokens |
+| `app.js` | All runtime logic: state, calculations, rendering, PDF I/O |
+
+## Skill maintenance (REQUIRED)
+
+The [`crediterreno-logic`](.claude/skills/crediterreno-logic/SKILL.md) skill documents the calculation and state logic in `app.js`. **Every subsequent change to `app.js` must update this skill in the same commit** whenever it touches:
+
+- ISR / IMSS / PMT / amortization formulas or SAT tables
+- State shape (`packState` / `loadState`) or version bump
+- Applied-suggestion sentinels in `appliedEIs`
+- The recalc pipeline order or invariants
+- Tab list, event bindings, or plan suggestion ranking
+- PDF `%%CTDATA%%` embedding/extraction
+
+Use the checklist in the skill's "When Changing Things" section. Pure cosmetic edits (whitespace, comments) do not require an update.
 
 ## Commands
 
@@ -25,7 +40,7 @@ Una calculadora integral de crédito Infonavit para compra de terreno (Crediterr
 
 ## Architecture
 
-All logic lives in a single `<script>` block inside `index.html`:
+All logic lives in `app.js` (loaded from `index.html`):
 
 - **State**: `cYears`, `extraPayments[]`, `fixedExpenses[]`, `extraIncomes[]`, `appliedEIs`
 - **Core modules**: ISR calculation (`calcISR`), credit amortization (`calcPMT`, `buildTable`), chart rendering (`renderChart`)

@@ -1,0 +1,9 @@
+{
+  "name": "calculadora-infonavit",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Calculadora integral de crédito Infonavit (single-page HTML/JS).",
+  "scripts": {
+    "test": "node --test test/"
+  }
+}

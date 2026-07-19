@@ -5,25 +5,41 @@ description: Use when modifying, debugging, or extending the Calculadora Infonav
 
 # Calculadora Infonavit — Business Logic Reference
 
-Single-page vanilla-JS calculator for Infonavit credit. All runtime logic lives in `app.js`; UI markup in `index.html`; styles in `styles.css`.
+Single-page vanilla-JS calculator for Infonavit credit.
 
-**Keep this skill in sync with `app.js`.** Every change to formulas, state shape, ID counters, PDF layout, or applied-suggestion rules requires updating the matching section here in the same commit.
+- `calc.js` — **pure** logic: SAT tables + calculation functions. Dual-mode (browser classic script + CommonJS export for Node tests).
+- `app.js` — DOM state, rendering, PDF I/O. Depends on `calc.js` being loaded first.
+- `index.html` — markup only. Loads `calc.js` before `app.js`, both `defer`ed.
+- `styles.css` — styles and design tokens.
+- `test/calc.test.js` — `node:test` unit tests. Run with `npm test`.
+
+**Keep this skill in sync with `calc.js` and `app.js`.** Every change to formulas, state shape, ID counters, PDF layout, or applied-suggestion rules requires updating the matching section here in the same commit. Pure-logic changes must also add/update cases in `test/calc.test.js`.
 
 ## Module Map
 
-| Area | Functions | Lines (approx) |
-|------|-----------|----------------|
-| Constants (SAT 2024, brand, EI types) | `BRAND`, `ISR_T`, `SUB_T`, `UMA_M`, `EI_TYPES` | 1–48 |
-| Global state | `cYears`, `extraPayments`, `fixedExpenses`, `extraIncomes`, `appliedEIs`, `epId/gfId/eiId` | 50–52 |
-| Tax calculations | `calcISR`, `calcIMSS` | 58–69 |
-| Amortization | `calcPMT`, `buildTable`, `groupByYear` | 71–93 |
-| Extra income scheduling | `eiToMonths`, `buildExtrasMap` | 94–111 |
-| Recalc pipeline | `recalcAll`, `recalcCredit`, `recalcNomina`, `recalcPlan` | 113–156 |
-| Renderers | `renderCreditResults`, `renderAmortTable`, `renderChart`, `renderNomina`, `renderPlan` | 158–254 |
-| CRUD lists | `addEP/removeEP/updateEP/renderEPList` and GF/EI equivalents | 256–305 |
-| Persistence | `packState`, `loadState`, `toB64`, `fromB64` | 307–336 |
-| PDF | `exportPDF`, `generatePDF`, `importPDF` | 338–543 |
-| UI plumbing | `showTab`, `toast`, `toggleTable`, event bindings | 545–567 |
+### `calc.js` (pure, no DOM)
+
+| Area | Functions / constants |
+|------|-----------------------|
+| SAT 2024 tables | `ISR_T` (11 brackets), `SUB_T`, `UMA_M = 3300.53` |
+| Labels & types | `MN`, `MNL`, `EI_TYPES` |
+| Tax calculations | `calcISR(g)`, `calcIMSS(g)` |
+| Amortization | `calcPMT(P,r,n)`, `buildTable(P,r,n,pmt,exMap,sm,sy)`, `groupByYear(rows)` |
+| Extra income scheduling | `eiToMonths(ei,sm,n)`, `buildExtrasMap(extraPayments,extraIncomes,appliedEIs,n,sm)` |
+
+`buildExtrasMap` takes state as explicit arguments (not closure) — see the tests for the exact contract.
+
+### `app.js` (DOM, state, rendering)
+
+| Area | Functions |
+|------|-----------|
+| Brand + global state | `BRAND`, `cYears`, `extraPayments`, `fixedExpenses`, `extraIncomes`, `appliedEIs`, `epId/gfId/eiId` |
+| Recalc pipeline | `recalcAll`, `recalcCredit`, `recalcNomina`, `recalcPlan` |
+| Renderers | `renderCreditResults`, `renderAmortTable`, `renderChart`, `renderNomina`, `renderPlan` |
+| CRUD lists | `addEP/removeEP/updateEP/renderEPList` and GF/EI equivalents |
+| Persistence | `packState`, `loadState`, `toB64`, `fromB64` |
+| PDF | `exportPDF`, `generatePDF`, `importPDF` |
+| UI plumbing | `showTab`, `toast`, `toggleTable`, event bindings |
 
 ## Core Formulas
 
@@ -134,11 +150,13 @@ Rebound on `window resize`.
 
 ## When Changing Things — Checklist
 
-- [ ] Formula change (ISR/IMSS/PMT/amort) → update "Core Formulas" section.
+- [ ] Formula change (ISR/IMSS/PMT/amort) → update "Core Formulas" here AND add/update cases in `test/calc.test.js`. Run `npm test`.
+- [ ] New table row (SAT bracket, subsidio) → update `calc.js` AND add a boundary test.
+- [ ] Signature change in `calc.js` → update every call site in `app.js` AND the affected tests.
 - [ ] Add/remove state field → bump `packState` `v`, add `loadState` migration/guard, update "State Shape".
 - [ ] New suggestion or applied-sentinel → update "Plan Suggestions Ranking" and "State Shape".
 - [ ] PDF layout change → note in module map only if new function; otherwise no doc change needed.
-- [ ] New tab / event binding → update "Module Map" line range and `showTab` index array (`['credito','nomina','plan']`).
+- [ ] New tab / event binding → update `showTab` index array (`['credito','nomina','plan']`) and this doc.
 - [ ] Change chart colors or segments → update "Chart Rendering".
 
 ## Common Pitfalls

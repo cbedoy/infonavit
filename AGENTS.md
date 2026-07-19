@@ -17,7 +17,9 @@ Una calculadora integral de crédito Infonavit. Simula pagos, amortización, nó
 |------|---------|
 | `index.html` | Markup only (structure, IDs, script/style tags) |
 | `styles.css` | All styles and design tokens |
-| `app.js` | All runtime logic: state, calculations, rendering, PDF I/O |
+| `calc.js` | **Pure** logic: SAT tables, `calcISR`, `calcIMSS`, `calcPMT`, `buildTable`, `buildExtrasMap`, `eiToMonths`, `groupByYear`. Dual-mode (browser classic script + CommonJS for tests) |
+| `app.js` | DOM state, rendering, PDF I/O, event wiring. Depends on globals declared in `calc.js` |
+| `test/calc.test.js` | `node:test` unit tests for `calc.js` |
 
 ## Skill maintenance (REQUIRED)
 
@@ -32,10 +34,13 @@ The [`infonavit-logic`](.claude/skills/infonavit-logic/SKILL.md) skill documents
 
 Use the checklist in the skill's "When Changing Things" section. Pure cosmetic edits (whitespace, comments) do not require an update.
 
+**Pure logic changes must also come with tests.** Anything added to `calc.js` — new formula, new table row, new argument — needs a corresponding case in `test/calc.test.js` in the same commit. `npm test` must pass before merge.
+
 ## Commands
 
 - **Build**: none — static HTML, no build step
-- **Dev**: `open index.html` or any static file server
+- **Dev**: `open index.html` or any static file server (e.g. `python3 -m http.server`)
+- **Test**: `npm test` — runs `node --test test/` against `calc.js`
 - **Deploy**: push `main` — GitHub Pages serves `index.html` from root
 
 ## Architecture

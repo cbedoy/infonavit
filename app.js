@@ -371,9 +371,9 @@ function generatePDF(){
 
   fc(C.red);doc.rect(0,0,W,30,'F');
   tc(C.white);doc.setFont('helvetica','bold');doc.setFontSize(15);
-  doc.text('Calculadora Integral Crediterreno',M,12);
+  doc.text('Calculadora Integral Infonavit',M,12);
   doc.setFont('helvetica','normal');doc.setFontSize(8);
-  doc.text('Infonavit · Simulación de crédito para compra de terreno',M,19);
+  doc.text('Infonavit · Simulación de crédito hipotecario',M,19);
   doc.setFont('helvetica','bold');doc.setFontSize(8);
   doc.text(BRAND.name,W-M,12,{align:'right'});
   doc.setFont('helvetica','normal');doc.setFontSize(7);
@@ -491,7 +491,7 @@ function generatePDF(){
   const limits=[
     'CALCULO DE ISR: Los montos de ISR son estimados con las tablas SAT 2024 y el subsidio al empleo. La retencion real de ISR realizada por el patron puede variar por conceptos adicionales como percepciones no ordinarias, deducciones personales, becas u otros factores no considerados.',
     'CUOTAS IMSS: Las cuotas del IMSS son una aproximacion. El calculo exacto depende del Salario Base de Cotizacion (SBC) registrado ante el IMSS, el cual puede ser diferente al salario bruto mensual ingresado.',
-    'CREDITO INFONAVIT: Las condiciones del credito Crediterreno varian segun el perfil del acreditado, historial de aportaciones, edad, y politicas vigentes de Infonavit al momento de la solicitud. La tasa de interes real puede diferir.',
+    'CREDITO INFONAVIT: Las condiciones del credito varian segun el perfil del acreditado, historial de aportaciones, edad, y politicas vigentes de Infonavit al momento de la solicitud. La tasa de interes real puede diferir.',
     'PAGOS EXTRAORDINARIOS: Los efectos de pagos extra son proyecciones bajo supuestos fijos de tasa y plazo. En la practica, Infonavit puede tener condiciones especificas para la aplicacion de pagos anticipados.',
     'TIPO DE CAMBIO Y ECONOMIA: Los calculos no consideran inflacion, cambios de tasa, reestructuras de credito ni ningun factor economico externo.',
   ];
@@ -521,10 +521,10 @@ function generatePDF(){
   doc.text(BRAND.builtWith,M,y+5);
   drawPageFooter();
 
-  doc.setProperties({title:'Crediterreno Export — '+BRAND.name,subject:'Simulacion Crediterreno Infonavit',
-    keywords:'%%CTDATA%%'+toB64(packState())+'%%CTDATA%%',creator:'Crediterreno App v3',author:BRAND.name});
+  doc.setProperties({title:'Calculadora Infonavit — '+BRAND.name,subject:'Simulacion Infonavit',
+    keywords:'%%CTDATA%%'+toB64(packState())+'%%CTDATA%%',creator:'Calculadora Infonavit v3',author:BRAND.name});
 
-  doc.save('crediterreno-'+new Date().toISOString().split('T')[0]+'.pdf');
+  doc.save('infonavit-'+new Date().toISOString().split('T')[0]+'.pdf');
   toast('✅ PDF exportado correctamente.');
 }
 
@@ -535,7 +535,7 @@ async function importPDF(file){
     const raw=new TextDecoder('latin1').decode(new Uint8Array(buf));
     const norm=raw.replace(/[\r\n\s]+/g,'');
     const m=norm.match(/%%CTDATA%%([\w+/=]+)%%CTDATA%%/);
-    if(!m){toast('❌ No se encontraron datos de Crediterreno en este PDF.',true);return;}
+    if(!m){toast('❌ No se encontraron datos en este PDF.',true);return;}
     loadState(JSON.parse(fromB64(m[1])));
     toast('✅ Datos importados correctamente.');
   }catch(e){toast('❌ Error al leer el PDF: '+e.message,true);}

@@ -1,11 +1,11 @@
 ---
-name: crediterreno-logic
-description: Use when modifying, debugging, or extending the Crediterreno calculator (app.js) — covers ISR/IMSS/PMT formulas, amortization with extras, extra-income scheduling, plan suggestions, and PDF round-trip state persistence.
+name: infonavit-logic
+description: Use when modifying, debugging, or extending the Calculadora Infonavit (app.js) — covers ISR/IMSS/PMT formulas, amortization with extras, extra-income scheduling, plan suggestions, and PDF round-trip state persistence.
 ---
 
-# Crediterreno — Business Logic Reference
+# Calculadora Infonavit — Business Logic Reference
 
-Single-page vanilla-JS calculator for Infonavit Crediterreno. All runtime logic lives in `app.js`; UI markup in `index.html`; styles in `styles.css`.
+Single-page vanilla-JS calculator for Infonavit credit. All runtime logic lives in `app.js`; UI markup in `index.html`; styles in `styles.css`.
 
 **Keep this skill in sync with `app.js`.** Every change to formulas, state shape, ID counters, PDF layout, or applied-suggestion rules requires updating the matching section here in the same commit.
 

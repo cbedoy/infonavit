@@ -1,8 +1,8 @@
-# Crediterreno 🏠
+# Calculadora Infonavit 🏠
 
-**Calculadora Integral de Crédito Infonavit para compra de terreno.**
+**Calculadora Integral de Crédito Infonavit.**
 
-Simula tu crédito Crediterreno con desglose completo de amortización, ISR estimado (tablas SAT 2024), IMSS, gastos fijos y un plan inteligente de pagos extraordinarios.
+Simula tu crédito Infonavit con desglose completo de amortización, ISR estimado (tablas SAT 2024), IMSS, gastos fijos y un plan inteligente de pagos extraordinarios.
 
 ## Características
 
@@ -20,13 +20,7 @@ Simula tu crédito Crediterreno con desglose completo de amortización, ISR esti
 | `index.html` | Markup HTML puro (sin `<style>`/`<script>` inline) |
 | `styles.css` | Todos los estilos y design tokens |
 | `app.js` | Lógica completa: estado, cálculos, rendering, PDF I/O |
-| `.claude/skills/crediterreno-logic/SKILL.md` | Referencia de la lógica de negocio para agentes AI |
-
-| Archivo | Propósito |
-|---------|-----------|
-| `index.html` | Markup HTML puro (sin <style>/<script> inline) |
-| `styles.css` | Todos los estilos y design tokens |
-| `app.js` | Lógica completa: estado, cálculos, rendering, PDF I/O |
+| `.claude/skills/infonavit-logic/SKILL.md` | Referencia de la lógica de negocio para agentes AI |
 
 ## Stack
 

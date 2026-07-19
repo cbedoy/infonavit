@@ -1,8 +1,8 @@
-# AGENTS.md — Crediterreno
+# AGENTS.md — Calculadora Infonavit
 
 ## Project Overview
 
-Una calculadora integral de crédito Infonavit para compra de terreno (Crediterreno). Simula pagos, amortización, nómina, ISR e ingresos extraordinarios. Single-page HTML/JS app.
+Una calculadora integral de crédito Infonavit. Simula pagos, amortización, nómina, ISR e ingresos extraordinarios. Single-page HTML/JS app.
 
 ## Tech Stack
 
@@ -21,7 +21,7 @@ Una calculadora integral de crédito Infonavit para compra de terreno (Crediterr
 
 ## Skill maintenance (REQUIRED)
 
-The [`crediterreno-logic`](.claude/skills/crediterreno-logic/SKILL.md) skill documents the calculation and state logic in `app.js`. **Every subsequent change to `app.js` must update this skill in the same commit** whenever it touches:
+The [`infonavit-logic`](.claude/skills/infonavit-logic/SKILL.md) skill documents the calculation and state logic in `app.js`. **Every subsequent change to `app.js` must update this skill in the same commit** whenever it touches:
 
 - ISR / IMSS / PMT / amortization formulas or SAT tables
 - State shape (`packState` / `loadState`) or version bump

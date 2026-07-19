@@ -58,10 +58,7 @@ header p{color:var(--muted);margin-top:3px;font-size:.85rem}
 .iw input:focus,.iw select:focus{border-color:var(--brand);background:#fff}
 .iw.nopr input,.iw.nopr select{padding-left:12px}
 
-.ptabs{display:flex;gap:8px}
-.ptab{flex:1;padding:9px 4px;border:1.5px solid var(--border);border-radius:9px;background:var(--bg);cursor:pointer;font-size:.9rem;font-weight:600;color:var(--muted);transition:all .18s;text-align:center}
-.ptab.active{border-color:var(--brand);background:var(--brand);color:#fff}
-.ptab:hover:not(.active){border-color:var(--brand);color:var(--brand)}
+.field select{width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:9px;font-size:.93rem;color:var(--text);background:var(--bg);outline:none;transition:border .2s}
 
 .rg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
 @media(max-width:420px){.rg{grid-template-columns:1fr}}

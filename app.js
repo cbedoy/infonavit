@@ -326,7 +326,7 @@ function loadState(data){
   gi('startYear').value=data.startYear||2025; gi('salary').value=data.salary||'';
   gi('currentSavings').value=data.currentSavings||'';
   cYears=data.years||10;
-  document.querySelectorAll('.ptab').forEach(t=>t.classList.toggle('active',parseInt(t.dataset.y)===cYears));
+  document.getElementById('years').value=cYears;
   extraPayments=data.extraPayments||[]; fixedExpenses=data.fixedExpenses||[];
   extraIncomes=data.extraIncomes||[]; appliedEIs=new Set(data.appliedEIs||[]);
   epId=data.epId||0; gfId=data.gfId||0; eiId=data.eiId||0;
@@ -557,11 +557,10 @@ function toast(msg,err=false){
   _tt=setTimeout(()=>el.classList.remove('on'),3500);
 }
 
-['price','savings','rate','startMonth','startYear'].forEach(id=>
+['price','savings','rate','years','startMonth','startYear'].forEach(id=>
   document.getElementById(id)?.addEventListener('input',recalcAll));
-document.querySelectorAll('.ptab').forEach(t=>t.addEventListener('click',()=>{
-  document.querySelectorAll('.ptab').forEach(x=>x.classList.remove('active'));
-  t.classList.add('active');cYears=parseInt(t.dataset.y);recalcAll();
-}));
+['price','savings','rate','years','startMonth','startYear'].forEach(id=>
+  document.getElementById(id)?.addEventListener('change',recalcAll));
+document.getElementById('years')?.addEventListener('change',function(){cYears=parseInt(this.value);recalcAll();});
 window.addEventListener('resize',()=>{if(window._credit)renderChart(groupByYear(window._credit.table));});
 renderEPList();renderGFList();renderEIList();recalcAll();
